@@ -10,7 +10,9 @@ renderer.code = function(token) {
     highlighted = hljs.highlightAuto(code).value;
   }
   var cls = lang ? ' class="language-' + lang + '"' : '';
-  return '<pre><code' + cls + '>' + highlighted + '</code></pre>';
+  // data-language 供 CSS 显示 marco 风格的语言标签
+  var dataLang = lang ? ' data-language="' + lang + '"' : '';
+  return '<pre' + dataLang + '><code' + cls + '>' + highlighted + '</code></pre>';
 };
 
 marked.setOptions({

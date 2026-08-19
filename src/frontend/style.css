@@ -19,6 +19,34 @@
   --font-body: 'Segoe UI', -apple-system, sans-serif;
   --font-reading: 'Georgia', 'Cambria', 'Times New Roman', serif;
   --zoom: 1;
+
+  /* ── Marco 预览主题 token（暗色，取自 Marco 项目 marco.css 的 .theme-dark）── */
+  --mk-body-font: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --mk-code-font: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Source Code Pro', Consolas, monospace;
+  --mk-bg: #0a0a0a;
+  --mk-bg-secondary: #1a1a1a;
+  --mk-bg-code: #1a1a1a;
+  --mk-bg-pre: #111111;
+  --mk-text: #f5f5f5;
+  --mk-text-secondary: #cccccc;
+  --mk-text-muted: #a0aec0;
+  --mk-heading: #a855f7;
+  --mk-heading-end: #ec4899;
+  --mk-strong: #f5f5f5;
+  --mk-link: #a855f7;
+  --mk-link-hover: #c084fc;
+  --mk-border: #2d3748;
+  --mk-border-strong: #4a5568;
+  --mk-blockquote-bg: #1a1a1a;
+  --mk-blockquote-border: #a855f7;
+  --mk-blockquote-text: #cccccc;
+  --mk-table-border: #2d3748;
+  --mk-table-header-bg: #1a1a1a;
+  --mk-table-header-color: #a855f7;
+  --mk-table-stripe: #171717;
+  --mk-row-hover: #1a1a1a;
+  --mk-mark-bg: #f59e0b;
+  --mk-mark-color: #0a0a0a;
 }
 
 /* Light theme — Catppuccin Latte inspired */
@@ -38,6 +66,32 @@
   --border-subtle: #dce0e8;
   --danger: #d20f39;
   --scrollbar: #bcc0cc;
+
+  /* ── Marco 预览主题 token（亮色，取自 Marco 项目 marco.css 的 .theme-light）── */
+  --mk-bg: #ffffff;
+  --mk-bg-secondary: #f7fafc;
+  --mk-bg-code: #edf2f7;
+  --mk-bg-pre: #f7fafc;
+  --mk-text: #2d3748;
+  --mk-text-secondary: #4a5568;
+  --mk-text-muted: #718096;
+  --mk-heading: #a855f7;
+  --mk-heading-end: #ec4899;
+  --mk-strong: #2d3748;
+  --mk-link: #a855f7;
+  --mk-link-hover: #9333ea;
+  --mk-border: #e2e8f0;
+  --mk-border-strong: #cbd5e0;
+  --mk-blockquote-bg: #f7fafc;
+  --mk-blockquote-border: #a855f7;
+  --mk-blockquote-text: #4a5568;
+  --mk-table-border: #e2e8f0;
+  --mk-table-header-bg: #f7fafc;
+  --mk-table-header-color: #a855f7;
+  --mk-table-stripe: #f1f5f9;
+  --mk-row-hover: #f7fafc;
+  --mk-mark-bg: #fef3c7;
+  --mk-mark-color: #1a1a1a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -307,39 +361,36 @@ html, body {
 }
 
 /* ============================================
-   PREVIEW — reading-optimized
+   PREVIEW — Marco 主题排版（铺满全屏）
    ============================================ */
 #preview-container {
   display: none;
   height: 100%;
-  background: var(--bg-base);
+  background: var(--mk-bg);
   overflow-y: auto;
 }
 
 #preview-container.active { display: block; flex: 1; min-width: 0; }
 
+/* Marco 排版：内容不限宽，铺满整个屏幕 */
 #preview-wrapper {
   position: relative;
-  max-width: 720px;
+  max-width: none;
   margin: 0 auto;
 }
 
 #preview {
-  padding: 36px 32px 60px;
-  font-family: var(--font-reading);
-  font-size: calc(15.5px * var(--zoom));
-  line-height: 1.85;
-  color: var(--text);
+  padding: 2rem;
+  font-family: var(--mk-body-font);
+  font-size: calc(16px * var(--zoom));
+  line-height: 1.6;
+  color: var(--mk-text);
   user-select: text;
 }
 
 /* Split mode */
 body.split-mode #editor-container.active {
   border-right: 1px solid var(--border);
-}
-
-body.split-mode #preview-wrapper {
-  max-width: none;
 }
 
 /* Preview resize handle */
@@ -366,69 +417,157 @@ body.preview-resizing { cursor: col-resize !important; }
 body.preview-resizing * { cursor: col-resize !important; }
 body.preview-resizing #preview { user-select: none; }
 
-/* Headings — clean, slightly warm */
+/* ── Marco 标题：左对齐 + 紫→粉渐变文字（marco 主题标志） ── */
 #preview h1, #preview h2, #preview h3,
 #preview h4, #preview h5, #preview h6 {
-  font-family: var(--font-body);
-  color: var(--text);
-  margin-top: 2em;
-  margin-bottom: 0.6em;
-  line-height: 1.25;
+  font-family: var(--mk-body-font);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+  text-align: left;
+  color: var(--mk-heading);
+  background: linear-gradient(45deg, var(--mk-heading), var(--mk-heading-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
 }
 
-#preview h1 {
-  font-size: 1.9em;
-  padding-bottom: 0.35em;
-  border-bottom: 1px solid var(--border);
+#preview h1 { font-size: 2em; }
+#preview h2 { font-size: 1.75em; }
+#preview h3 { font-size: 1.5em; }
+#preview h4 { font-size: 1.25em; }
+#preview h5 { font-size: 1.1em; }
+#preview h6 { font-size: 1em; }
+
+/* 标题内的行内元素退出渐变填充（还原为普通着色） */
+#preview h1 code, #preview h2 code, #preview h3 code,
+#preview h4 code, #preview h5 code, #preview h6 code {
+  -webkit-text-fill-color: initial;
+  color: var(--mk-text);
 }
 
-#preview h2 {
-  font-size: 1.4em;
-  padding-bottom: 0.25em;
-  border-bottom: 1px solid var(--border-subtle);
+#preview h1 mark, #preview h2 mark, #preview h3 mark,
+#preview h4 mark, #preview h5 mark, #preview h6 mark {
+  -webkit-text-fill-color: initial;
+  color: var(--mk-mark-color);
 }
 
-#preview h3 { font-size: 1.15em; }
-#preview h4 { font-size: 1em; color: var(--text-secondary); }
+#preview h1 a, #preview h2 a, #preview h3 a,
+#preview h4 a, #preview h5 a, #preview h6 a {
+  -webkit-text-fill-color: initial;
+  color: var(--mk-link);
+}
 
-#preview p { margin: 0.9em 0; }
+#preview h1 strong, #preview h2 strong, #preview h3 strong,
+#preview h4 strong, #preview h5 strong, #preview h6 strong,
+#preview h1 b, #preview h2 b, #preview h3 b,
+#preview h4 b, #preview h5 b, #preview h6 b {
+  font-weight: 800;
+  -webkit-text-stroke: 0.02em var(--mk-heading);
+}
+
+#preview p {
+  margin: 0 0 1rem 0;
+  color: var(--mk-text);
+}
 
 #preview a {
-  color: var(--link);
+  color: var(--mk-link);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.15s;
+  border-bottom: none;
+  transition: none;
 }
-#preview a:hover { border-bottom-color: var(--link); }
+#preview a:hover {
+  color: var(--mk-link-hover);
+  text-decoration: underline;
+  border-bottom-color: transparent;
+}
+#preview a:visited { color: var(--mk-link); }
 
-/* Inline code */
-#preview code {
-  background: var(--bg-raised);
-  padding: 1.5px 5px;
+#preview strong, #preview b {
+  font-weight: 700;
+  color: var(--mk-strong);
+}
+
+#preview em, #preview i { font-style: italic; color: var(--mk-text); }
+
+#preview del, #preview s {
+  text-decoration: line-through;
+  color: var(--mk-text-muted);
+}
+
+#preview mark {
+  background-color: var(--mk-mark-bg);
+  color: var(--mk-mark-color);
+  padding: 0.1em 0.25em;
   border-radius: 3px;
-  font-family: var(--font-mono);
-  font-size: 0.85em;
-  color: var(--accent);
 }
 
-/* Code blocks */
+#preview sup, #preview sub {
+  font-size: 0.8em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+#preview sup { top: -0.5em; }
+#preview sub { bottom: -0.25em; }
+
+#preview kbd {
+  background-color: var(--mk-bg-code);
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+  color: var(--mk-text);
+  font-family: var(--mk-code-font);
+  font-size: 0.875em;
+  padding: 0.2em 0.4em;
+}
+
+/* ── Marco 行内代码 ── */
+#preview code {
+  font-family: var(--mk-code-font);
+  font-size: 0.875em;
+  background-color: var(--mk-bg-code);
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+}
+
+/* ── Marco 代码块：边框 + 圆角 + 语言标签 ── */
 #preview pre {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background-color: var(--mk-bg-pre);
+  border: 1px solid var(--mk-border);
   border-radius: 6px;
-  padding: 18px 20px;
-  overflow-x: auto;
-  margin: 1.2em 0;
-  line-height: 1.65;
+  margin: 1rem 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#preview pre[data-language]::before {
+  content: attr(data-language);
+  display: block;
+  background-color: var(--mk-bg-pre);
+  color: var(--mk-text-secondary);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-family: var(--mk-body-font);
+  font-weight: 400;
+  border-bottom: 1px solid var(--mk-border);
+  opacity: 0.8;
 }
 
 #preview pre code {
+  display: block;
+  padding: 1rem;
   background: none;
-  padding: 0;
-  color: var(--text);
-  font-size: 0.82em;
+  border-radius: 0;
+  color: var(--mk-text);
+  font-size: 0.875em;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  word-break: normal;
 }
 
 /* Syntax highlighting — Catppuccin-inspired */
@@ -457,12 +596,12 @@ body.preview-resizing #preview { user-select: none; }
 #preview pre code .hljs-name { color: #cba6f7; }
 #preview pre code .hljs-selector-class,
 #preview pre code .hljs-selector-id { color: #89dceb; }
-#preview pre code .hljs-params { color: var(--text); }
 #preview pre code .hljs-punctuation { color: #9399b2; }
 #preview pre code .hljs-symbol { color: #f2cdcd; }
 #preview pre code .hljs-section { color: #89b4fa; font-weight: 600; }
 #preview pre code .hljs-emphasis { font-style: italic; }
 #preview pre code .hljs-strong { font-weight: 600; }
+#preview pre code .hljs-params { color: var(--mk-text); }
 
 /* Syntax highlighting — light theme (Catppuccin Latte) */
 [data-theme="light"] #preview pre code .hljs-keyword,
@@ -490,67 +629,117 @@ body.preview-resizing #preview { user-select: none; }
 [data-theme="light"] #preview pre code .hljs-name { color: #8839ef; }
 [data-theme="light"] #preview pre code .hljs-selector-class,
 [data-theme="light"] #preview pre code .hljs-selector-id { color: #04a5e5; }
-[data-theme="light"] #preview pre code .hljs-params { color: var(--text); }
+[data-theme="light"] #preview pre code .hljs-params { color: var(--mk-text); }
 [data-theme="light"] #preview pre code .hljs-punctuation { color: #6c6f85; }
 [data-theme="light"] #preview pre code .hljs-symbol { color: #dd7878; }
 [data-theme="light"] #preview pre code .hljs-section { color: #1e66f5; }
 
-/* Blockquotes */
+/* ── Marco 引用块：紫色左边框 + 浅底 ── */
 #preview blockquote {
-  border-left: 2px solid var(--accent);
-  padding-left: 18px;
-  margin: 1.2em 0;
-  color: var(--text-secondary);
-  font-style: italic;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--mk-blockquote-border);
+  background-color: var(--mk-blockquote-bg);
+  color: var(--mk-blockquote-text);
+  border-radius: 0 4px 4px 0;
+  font-style: normal;
 }
 
-/* Images */
+#preview blockquote > :first-child { margin-top: 0; }
+#preview blockquote > :last-child { margin-bottom: 0; }
+
+/* ── Marco 图片 ── */
 #preview img {
   max-width: 100%;
-  border-radius: 6px;
-  margin: 0.5em 0;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  margin: 0;
 }
 
-/* Tables */
-#preview table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1.2em 0;
-  font-family: var(--font-body);
+/* 图片题注：紧跟图片的 <em> 居中斜体 */
+#preview img + em {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  color: var(--mk-text-muted);
+  margin-top: 0.4rem;
   font-size: 0.9em;
 }
 
+/* ── Marco 表格：铺满宽度 + 斑马纹 + 行 hover ── */
+#preview table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  font-family: var(--mk-body-font);
+  font-size: 0.95em;
+}
+
 #preview th, #preview td {
-  border: 1px solid var(--border);
-  padding: 8px 14px;
+  border: 1px solid var(--mk-table-border);
+  padding: 0.6rem 0.85rem;
   text-align: left;
 }
 
 #preview th {
-  background: var(--bg-raised);
+  background-color: var(--mk-table-header-bg);
+  color: var(--mk-table-header-color);
   font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  font-size: 0.8em;
-  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 1em;
+  letter-spacing: normal;
 }
 
-/* Lists */
-#preview ul, #preview ol { padding-left: 1.8em; margin: 0.6em 0; }
-#preview li { margin: 0.3em 0; }
-#preview li::marker { color: var(--text-dim); }
+#preview tr:nth-child(even) {
+  background-color: var(--mk-table-stripe);
+}
 
-/* Horizontal rule */
+#preview tbody tr:hover {
+  background-color: var(--mk-row-hover);
+}
+
+/* ── Marco 列表 ── */
+#preview ul, #preview ol {
+  margin: 0.5rem 0 1rem 0;
+  padding-left: 2rem;
+}
+
+#preview li {
+  margin-bottom: 0.35rem;
+  color: var(--mk-text);
+}
+
+#preview li + li { margin-top: 0.15rem; }
+
+#preview li::marker { color: inherit; }
+
+/* 任务列表：GFM 复选框着色为主题链接色 */
+#preview li:has(> input[type='checkbox']) {
+  list-style-type: none;
+  margin-left: -1.4em;
+}
+
+#preview li input[type='checkbox'] {
+  accent-color: var(--mk-link);
+  margin-right: 0.4em;
+  vertical-align: middle;
+}
+
+/* ── Marco 分隔线 ── */
 #preview hr {
   border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 2.5em 0;
+  height: 0;
+  background: none;
+  border-top: 1px solid var(--mk-border);
+  margin: 1.5rem 0;
 }
 
-/* Strong / em */
-#preview strong { color: var(--text); font-weight: 600; }
-#preview em { font-style: italic; }
+/* ── 预览区文本选择 ── */
+#preview ::selection {
+  background-color: var(--mk-mark-bg);
+  color: var(--mk-mark-color);
+}
 
 /* ============================================
    STATUS BAR — barely there
@@ -775,25 +964,27 @@ body.preview-resizing #preview { user-select: none; }
   stroke-linecap: round;
 }
 
-/* Find match highlights in preview */
-mark.find-match {
+/* Find match highlights in preview（加 #preview 前缀以保证优先级高于 #preview mark） */
+#preview mark.find-match {
   background: rgba(224, 164, 122, 0.25);
   color: inherit;
   border-radius: 2px;
 }
 
-mark.find-match.find-active {
+#preview mark.find-match.find-active {
   background: var(--accent);
   color: var(--bg-base);
+  -webkit-text-fill-color: initial;
 }
 
-[data-theme="light"] mark.find-match {
+[data-theme="light"] #preview mark.find-match {
   background: rgba(196, 114, 58, 0.2);
 }
 
-[data-theme="light"] mark.find-match.find-active {
+[data-theme="light"] #preview mark.find-match.find-active {
   background: var(--accent);
   color: #fff;
+  -webkit-text-fill-color: initial;
 }
 
 /* ============================================

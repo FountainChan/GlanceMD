@@ -1,9 +1,17 @@
-name: Build
+name: Build & Release
 
 on:
   push:
-    branches: [main]
+    tags: ['v*']
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag (e.g. v1.2.2)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
 
 jobs:
   build-windows:
@@ -16,14 +24,39 @@ jobs:
           targets: x86_64-pc-windows-msvc
 
       - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: Peekdown
 
       - name: Build
         run: cargo build --release --target x86_64-pc-windows-msvc
 
-      - uses: actions/upload-artifact@v4
+      - name: Resolve release tag
+        id: tag
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "name=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload exe to artifact
+        uses: actions/upload-artifact@v4
         with:
           name: peekdown-windows
           path: target/x86_64-pc-windows-msvc/release/peekdown.exe
           if-no-files-found: error
+
+      - name: Create or update release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.tag.outputs.name }}"
+          TITLE="Peekdown ${TAG}"
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" \
+              --title "$TITLE" \
+              --notes "Peekdown ${TAG} — built from GitHub Actions."
+          fi
+          gh release upload "$TAG" \
+            "target/x86_64-pc-windows-msvc/release/peekdown.exe" \
+            --repo "$GITHUB_REPOSITORY" --clobber

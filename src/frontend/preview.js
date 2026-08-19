@@ -12,7 +12,14 @@ renderer.code = function(token) {
   var cls = lang ? ' class="language-' + lang + '"' : '';
   // data-language 供 CSS 显示 marco 风格的语言标签
   var dataLang = lang ? ' data-language="' + lang + '"' : '';
-  return '<pre' + dataLang + '><code' + cls + '>' + highlighted + '</code></pre>';
+  // 右上角复制按钮（复制逻辑走事件委托，见文件末尾）
+  var copyBtn =
+    '<button class="code-copy-btn" title="Copy code" aria-label="Copy code">' +
+    '<svg viewBox="0 0 16 16" fill="none">' +
+    '<rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>' +
+    '<path d="M11 5V3.5a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1H4.5" stroke="currentColor" stroke-width="1.2"/>' +
+    '</svg></button>';
+  return '<pre' + dataLang + '>' + copyBtn + '<code' + cls + '>' + highlighted + '</code></pre>';
 };
 
 marked.setOptions({
@@ -59,3 +66,51 @@ window.__setImage = function(path, dataUri) {
     }
   }
 };
+
+/* ── 代码块右上角复制按钮 ── */
+
+// 兜底复制：clipboard API 不可用时使用隐藏 textarea + execCommand
+function copyCodeFallback(text, done) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+// 复制成功后的按钮反馈（临时换成对勾，1.5s 后还原）
+function copyCodeDone(btn) {
+  var orig = btn.innerHTML;
+  btn.classList.add('copied');
+  btn.innerHTML =
+    '<svg viewBox="0 0 16 16" fill="none">' +
+    '<path d="M3.5 8.5l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>';
+  setTimeout(function() {
+    btn.classList.remove('copied');
+    btn.innerHTML = orig;
+  }, 1500);
+}
+
+// 事件委托：preview 每次 innerHTML 重建后仍有效，无需重新绑定
+document.getElementById('preview-container').addEventListener('click', function(e) {
+  if (!e.target || !e.target.closest) return;
+  var btn = e.target.closest('.code-copy-btn');
+  if (!btn) return;
+  var pre = btn.parentElement;
+  var codeEl = pre ? pre.querySelector('code') : null;
+  if (!codeEl) return;
+  // textContent 保留高亮前的原始代码文本（含换行与缩进）
+  var text = codeEl.textContent;
+  function done() { copyCodeDone(btn); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function() {
+      copyCodeFallback(text, done);
+    });
+  } else {
+    copyCodeFallback(text, done);
+  }
+});

@@ -570,6 +570,51 @@ body.preview-resizing #preview { user-select: none; }
   word-break: normal;
 }
 
+/* ── 代码块右上角复制按钮 ── */
+#preview pre .code-copy-btn {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--mk-border);
+  border-radius: 5px;
+  background: var(--mk-bg-pre);
+  color: var(--mk-text-muted);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s, background-color 0.15s, color 0.15s, border-color 0.15s;
+  z-index: 10;
+}
+
+#preview pre:hover .code-copy-btn,
+#preview pre .code-copy-btn:focus-visible {
+  opacity: 1;
+}
+
+#preview pre .code-copy-btn svg {
+  width: 1.05em;
+  height: 1.05em;
+  display: block;
+  stroke: currentColor;
+}
+
+#preview pre .code-copy-btn:hover {
+  background: var(--mk-bg-secondary);
+  color: var(--mk-link);
+  border-color: var(--mk-link);
+}
+
+#preview pre .code-copy-btn.copied {
+  color: #1a7f37;
+  border-color: #1a7f37;
+  background: var(--mk-bg-pre);
+}
+
 /* Syntax highlighting — Catppuccin-inspired */
 #preview pre code .hljs-keyword,
 #preview pre code .hljs-selector-tag { color: #cba6f7; }

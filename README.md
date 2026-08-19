@@ -1,66 +1,90 @@
-# Peekdown
+<p align="center">
+  <b>简体中文</b> · <a href="README.en.md">English</a>
+</p>
 
-A lightweight native Windows markdown viewer and editor. Notepad-fast startup, Obsidian-pretty rendering — in a single ~800 KB executable.
+# 🚀 Peekdown
 
-Built with Rust + WebView2. No installer, no runtime dependencies, no Electron.
+一款轻量级的原生 Windows Markdown 查看器与编辑器。启动速度媲美记事本，渲染效果媲美 Obsidian —— 全部打包在约 800 KB 的单文件可执行程序中。
 
-![Preview mode](screenshot%201.jpg)
-![Split view](screenshot%202.jpg)
+使用 Rust + WebView2 构建。无需安装器、无运行时依赖、不含 Electron。
 
-## Features
+![预览模式](screenshot%201.jpg)
+![分屏模式](screenshot%202.jpg)
 
-- **Instant startup** — native window, no framework overhead
-- **Live preview** — rendered markdown with full GFM support (tables, task lists, footnotes)
-- **Split view** — side-by-side editor and preview with live sync (Ctrl+\\)
-- **Syntax highlighting** — 30+ languages via highlight.js
-- **Multi-tab** — open multiple files, auto-hides tab bar for single files
-- **Dark/Light themes** — Catppuccin Mocha and Latte color schemes
-- **Find in document** — Ctrl+F with match highlighting and navigation
-- **Table of Contents** — auto-generated outline sidebar (Ctrl+Shift+O)
-- **Zoom** — Ctrl+/- or Ctrl+scroll, with level indicator
-- **Drag & drop** — drop `.md` files to open, drop multiple to open tabs
-- **Adjustable preview width** — drag the edge to resize
-- **Recent files** — quick-open panel on empty tabs
-- **Cross-mode selection** — selected text stays selected when toggling edit/preview
-- **File associations** — use as default `.md` viewer via "Open With"
-- **Single executable** — everything embedded, nothing to install
+## 🎨 默认 Marco 排版
 
-## Keyboard Shortcuts
+默认采用 **Marco / Polo** 阅读器的 Marco 排版风格（Astro/Space 主题）：
 
-| Shortcut | Action |
+- **标题居左对齐**，带紫→粉渐变配色（`#a855f7 → #ec4899`）✨
+- **内容铺满整个屏幕**，不再受固定宽度限制 📐
+- **表格铺满全宽**，斑马纹 + 行悬停高亮
+- 无衬线字体（Segoe UI），16px / 1.6 行高，阅读舒适
+- 代码块带边框圆角与**语言标签**，深色/浅色两套配色自动适配 🌙/☀️
+
+## ✅ 功能特性
+
+- **极速启动** ⚡ — 原生窗口，无框架开销
+- **实时预览** 👀 — 完整 GFM 支持（表格、任务列表、脚注）
+- **分屏模式** ↔️ — 编辑器与预览并排，实时同步（Ctrl+\）
+- **语法高亮** 🌈 — 30+ 种语言（highlight.js）
+- **多标签页** 📑 — 打开多个文件，单文件时自动隐藏标签栏
+- **深色/浅色主题** 🌙/☀️ — 一键切换
+- **文档内查找** 🔍 — Ctrl+F，高亮匹配并支持导航
+- **目录侧栏** 🧭 — 自动生成大纲（Ctrl+Shift+O）
+- **缩放** 🔎 — Ctrl+/- 或 Ctrl+滚轮，带缩放指示
+- **拖放打开** 📥 — 拖入 `.md` 文件即打开，可多选
+- **可调预览宽度** 📐 — 拖动边缘调整
+- **最近文件** 🕘 — 空标签页快速打开面板
+- **跨模式选区保持** 🔄 — 切换编辑/预览时选中文本不丢失
+- **文件关联** 📄 — 通过"打开方式"设为默认 `.md` 查看器
+- **单文件可执行** 💾 — 所有资源内嵌，无需安装
+
+## ⌨️ 键盘快捷键
+
+| 快捷键 | 功能 |
 |---|---|
-| Ctrl+O | Open file |
-| Ctrl+S | Save |
-| Ctrl+Shift+S | Save As |
-| Ctrl+N | New tab |
-| Ctrl+W | Close tab |
-| Ctrl+Tab | Next tab |
-| Ctrl+Shift+Tab | Previous tab |
-| Ctrl+E | Toggle edit/preview |
-| Ctrl+\\ | Toggle split view |
-| Ctrl+F | Find in document |
-| Ctrl+Shift+O | Toggle outline |
-| Ctrl+= / Ctrl+- | Zoom in/out |
-| Ctrl+0 | Reset zoom |
+| Ctrl+O | 打开文件 |
+| Ctrl+S | 保存 |
+| Ctrl+Shift+S | 另存为 |
+| Ctrl+N | 新建标签页 |
+| Ctrl+W | 关闭标签页 |
+| Ctrl+Tab | 下一个标签页 |
+| Ctrl+Shift+Tab | 上一个标签页 |
+| Ctrl+E | 切换编辑/预览 |
+| Ctrl+\ | 切换分屏视图 |
+| Ctrl+F | 文档内查找 |
+| Ctrl+Shift+O | 切换大纲侧栏 |
+| Ctrl+= / Ctrl+- | 放大 / 缩小 |
+| Ctrl+0 | 重置缩放 |
 
-## Build
+## 🛠️ 构建
 
-Requires Rust and the WebView2 runtime (pre-installed on Windows 10/11).
+需要 Rust 和 WebView2 运行时（Windows 10/11 预装）。
 
 ```bash
 cargo build --release
 ```
 
-Output: `target/release/peekdown.exe`
+输出：`target/release/peekdown.exe`
 
-## Tech Stack
+### 🚦 GitHub Actions 发布
 
-- **Rust** — window management, file I/O, IPC ([tao](https://github.com/niceshell/niceshell) + [wry](https://github.com/niceshell/niceshell))
-- **WebView2** — rendering engine (Edge, pre-installed on Win10/11)
-- **marked.js** — markdown to HTML
-- **highlight.js** — code syntax highlighting
-- **No Electron, no Node, no bundler** — all frontend assets are embedded at compile time via `include_str!`
+推送 `v*` 标签即自动构建并发布 Release：
 
-## License
+```bash
+git tag v1.2.2 && git push origin v1.2.2
+```
+
+构建产物：`target/x86_64-pc-windows-msvc/release/peekdown.exe`
+
+## ⚙️ 技术栈
+
+- **Rust** — 窗口管理、文件读写、进程通信（[tao](https://github.com/niceshell/niceshell) + [wry](https://github.com/niceshell/niceshell)）
+- **WebView2** — 渲染引擎（Edge，Windows 10/11 预装）
+- **marked.js** — Markdown 转 HTML
+- **highlight.js** — 代码语法高亮
+- **不含 Electron、不含 Node、不含打包器** — 全部前端资源通过 `include_str!` 在编译期嵌入
+
+## 📄 许可证
 
 MIT

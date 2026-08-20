@@ -615,6 +615,29 @@ body.preview-resizing #preview { user-select: none; }
   background: var(--mk-bg-pre);
 }
 
+/* ── YAML frontmatter（文档开头 --- 元信息）── */
+#preview .frontmatter {
+  margin: 1rem 0;
+  border: 1px solid var(--mk-border);
+  border-radius: 6px;
+  background-color: var(--mk-bg-code);
+  overflow: hidden;
+}
+
+#preview .frontmatter pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0.75rem 1rem;
+  font-family: var(--mk-body-font);
+  font-size: 1em;
+  line-height: 1.5;
+  color: var(--mk-text-secondary);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
 /* Syntax highlighting — Catppuccin-inspired */
 #preview pre code .hljs-keyword,
 #preview pre code .hljs-selector-tag { color: #cba6f7; }

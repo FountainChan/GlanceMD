@@ -22,6 +22,29 @@ renderer.code = function(token) {
   return '<pre' + dataLang + '>' + copyBtn + '<code' + cls + '>' + highlighted + '</code></pre>';
 };
 
+// 文档开头 YAML frontmatter（--- 包裹）特殊处理：
+// 若直接交给 marked，结尾的 --- 会被当作 setext 标题下划线，
+// 导致整块 frontmatter 以超大标题渲染、且与正文之间失去分隔线。
+// 这里在最前提取并转义为普通信息块，再补一个空行 + --- 生成分隔线。
+function stripFrontmatter(markdown) {
+  var m = /^---\r?\n([\s\S]+?)\r?\n---\s*\r?\n?/.exec(markdown);
+  if (!m) return markdown;
+  var esc = m[1]
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return (
+    '<div class="frontmatter"><pre>' + esc + '</pre></div>\n\n---\n\n' +
+    markdown.slice(m[0].length)
+  );
+}
+
+marked.use({
+  hooks: {
+    preprocess: stripFrontmatter,
+  },
+});
+
 marked.setOptions({
   breaks: true,
   gfm: true,

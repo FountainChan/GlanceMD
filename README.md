@@ -72,7 +72,7 @@ cargo build --release
 推送 `v*` 标签即自动构建并发布 Release：
 
 ```bash
-git tag v1.2.3 && git push origin v1.2.3
+git tag v1.2.4 && git push origin v1.2.4
 ```
 
 构建产物：`target/x86_64-pc-windows-msvc/release/peekdown.exe`

@@ -382,7 +382,7 @@ html, body {
 #preview {
   padding: 2rem;
   font-family: var(--mk-body-font);
-  font-size: calc(16px * var(--zoom));
+  font-size: calc(15px * var(--zoom));
   line-height: 1.6;
   color: var(--mk-text);
   user-select: text;
@@ -776,7 +776,7 @@ body.preview-resizing #preview { user-select: none; }
   border: none;
   height: 0;
   background: none;
-  border-top: 1px solid var(--mk-border);
+  border-top: 1px solid var(--mk-border-strong);
   margin: 1.5rem 0;
 }
 

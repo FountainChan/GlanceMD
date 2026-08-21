@@ -72,7 +72,7 @@ cargo build --release
 推送 `v*` 标签即自动构建并发布 Release：
 
 ```bash
-git tag v1.3.0 && git push origin v1.3.0
+git tag v1.3.1 && git push origin v1.3.1
 ```
 
 构建产物：`target/x86_64-pc-windows-msvc/release/glancemd.exe`

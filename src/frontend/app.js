@@ -709,7 +709,7 @@ function setTheme(theme) {
 }
 
 document.getElementById('btn-theme').addEventListener('click', function() {
-  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  var current = document.documentElement.getAttribute('data-theme') || 'light';
   setTheme(current === 'dark' ? 'light' : 'dark');
 });
 
@@ -717,7 +717,7 @@ document.getElementById('btn-theme').addEventListener('click', function() {
 document.addEventListener('DOMContentLoaded', function() {
   var saved = null;
   try { saved = localStorage.getItem('glancemd-theme'); } catch(e) {}
-  if (saved) setTheme(saved);
+  setTheme(saved || 'light');
   TabManager.createTab(null, '');
   updateWordCount();
   showRecentPanel();

@@ -63,7 +63,7 @@ Output: `target/release/glancemd.exe`
 Push a `v*` tag to automatically build and publish a release:
 
 ```bash
-git tag v1.3.0 && git push origin v1.3.0
+git tag v1.3.1 && git push origin v1.3.1
 ```
 
 ```bash

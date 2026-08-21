@@ -3,9 +3,9 @@
 from PIL import Image, ImageDraw, ImageFilter
 
 S = 512  # 画布尺寸
-# 底色：亮蓝 → Marco 紫（比紫→粉更偏蓝）
-C1 = (77, 157, 255)    # #4d9dff 亮蓝
-C2 = (168, 85, 247)    # #a855f7 Marco 紫
+# 底色：亮紫 → 粉（Marco 主题渐变，v1 版配色）
+C1 = (186, 113, 255)   # #ba71ff 亮紫
+C2 = (236, 72, 153)    # #ec4899 Marco 粉
 
 img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
 

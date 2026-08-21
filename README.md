@@ -1,15 +1,30 @@
+# 🚀 GlanceMD
+
 <p align="center">
   <b>简体中文</b> · <a href="README.en.md">English</a>
 </p>
 
-# 🚀 GlanceMD
+<p align="center">
+  <a href="https://github.com/FountainChan/GlanceMD/releases/latest"><img src="https://img.shields.io/github/v/release/FountainChan/GlanceMD?style=flat-square&logo=github&color=a855f7" alt="release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/FountainChan/GlanceMD?style=flat-square&color=ec4899" alt="license"></a>
+  <a href="https://github.com/FountainChan/GlanceMD/stargazers"><img src="https://img.shields.io/github/stars/FountainChan/GlanceMD?style=flat-square&color=f59e0b" alt="stars"></a>
+  <img src="https://img.shields.io/badge/platform-Windows-0078D6?style=flat-square&logo=windows11" alt="platform">
+  <img src="https://img.shields.io/badge/built%20with-Rust-DEA584?style=flat-square&logo=rust" alt="rust">
+  <img src="https://img.shields.io/github/last-commit/FountainChan/GlanceMD?style=flat-square&color=8b5cf6" alt="last commit">
+</p>
 
 一款轻量级的原生 Windows Markdown 查看器与编辑器。启动速度媲美记事本，渲染效果媲美 Obsidian —— 全部打包在约 800 KB 的单文件可执行程序中。
 
 使用 Rust + WebView2 构建。无需安装器、无运行时依赖、不含 Electron。
 
-![预览模式](screenshot%201.jpg)
-![分屏模式](screenshot%202.jpg)
+本项目基于开源项目 **[Peekdown](https://github.com/Mockitup/Peekdown)**（by Mockitup）深度开发而来，并采用 **[Marco](https://github.com/Ranrar/Marco)** 阅读器的排版主题。详见[致谢](#-致谢)。
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=FountainChan&repo=GlanceMD&show_icons=true&hide_border=true&title_color=a855f7&icon_color=ec4899&text_color=586e8c&bg_color=00000000" alt="GitHub Stats" height="165">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
+</p>
+
+<!-- TODO: v1.3.2+ 基于新版 GlanceMD 重新截图后恢复（截图预览模式 / 分屏模式） -->
 
 ## 🎨 默认 Marco 排版
 
@@ -72,7 +87,7 @@ cargo build --release
 推送 `v*` 标签即自动构建并发布 Release：
 
 ```bash
-git tag v1.3.1 && git push origin v1.3.1
+git tag v1.3.2 && git push origin v1.3.2
 ```
 
 构建产物：`target/x86_64-pc-windows-msvc/release/glancemd.exe`
@@ -89,7 +104,7 @@ git tag v1.3.1 && git push origin v1.3.1
 
 本项目基于以下开源项目构建，并从中汲取了大量养分：
 
-- **[GlanceMD](https://github.com/Mockitup/GlanceMD)**（by Mockitup）— 本项目的前身。窗口管理、文件 I/O、多标签架构与整体产品形态均源自它
+- **[Peekdown](https://github.com/Mockitup/Peekdown)**（by Mockitup）— 本项目的前身。窗口管理、文件 I/O、多标签架构与整体产品形态均源自它
 - **[Marco](https://github.com/Ranrar/Marco)** / [marco-core](https://github.com/Ranrar/marco-core)（by Kim Skov Rasmussen，MIT）— 预览排版主题来自 Marco 的 Astro/Space 主题：渐变标题、铺满全屏、表格斑马纹等
 
 感谢两位作者的开源精神！🚀

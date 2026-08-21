@@ -1,15 +1,30 @@
+# 🚀 GlanceMD
+
 <p align="center">
   <a href="README.md">简体中文</a> · <b>English</b>
 </p>
 
-# 🚀 GlanceMD
+<p align="center">
+  <a href="https://github.com/FountainChan/GlanceMD/releases/latest"><img src="https://img.shields.io/github/v/release/FountainChan/GlanceMD?style=flat-square&logo=github&color=a855f7" alt="release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/FountainChan/GlanceMD?style=flat-square&color=ec4899" alt="license"></a>
+  <a href="https://github.com/FountainChan/GlanceMD/stargazers"><img src="https://img.shields.io/github/stars/FountainChan/GlanceMD?style=flat-square&color=f59e0b" alt="stars"></a>
+  <img src="https://img.shields.io/badge/platform-Windows-0078D6?style=flat-square&logo=windows11" alt="platform">
+  <img src="https://img.shields.io/badge/built%20with-Rust-DEA584?style=flat-square&logo=rust" alt="rust">
+  <img src="https://img.shields.io/github/last-commit/FountainChan/GlanceMD?style=flat-square&color=8b5cf6" alt="last commit">
+</p>
 
 A lightweight native Windows markdown viewer and editor. Notepad-fast startup, Obsidian-pretty rendering — in a single ~800 KB executable.
 
 Built with Rust + WebView2. No installer, no runtime dependencies, no Electron.
 
-![Preview mode](screenshot%201.jpg)
-![Split view](screenshot%202.jpg)
+GlanceMD is deeply developed from the open-source project **[Peekdown](https://github.com/Mockitup/Peekdown)** (by Mockitup), with the preview typography theme from the **[Marco](https://github.com/Ranrar/Marco)** reader. See [Acknowledgments](#-acknowledgments).
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=FountainChan&repo=GlanceMD&show_icons=true&hide_border=true&title_color=a855f7&icon_color=ec4899&text_color=586e8c&bg_color=00000000" alt="GitHub Stats" height="165">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
+</p>
+
+<!-- TODO: re-add screenshots based on the new GlanceMD build (preview mode / split view) -->
 
 ## ✅ Features
 
@@ -63,7 +78,7 @@ Output: `target/release/glancemd.exe`
 Push a `v*` tag to automatically build and publish a release:
 
 ```bash
-git tag v1.3.1 && git push origin v1.3.1
+git tag v1.3.2 && git push origin v1.3.2
 ```
 
 ```bash
@@ -82,7 +97,7 @@ target/x86_64-pc-windows-msvc/release/glancemd.exe
 
 This project is built on top of, and deeply indebted to:
 
-- **[GlanceMD](https://github.com/Mockitup/GlanceMD)** (by Mockitup) — the project this fork originated from. Window management, file I/O, multi-tab architecture and the overall product shape all come from it
+- **[Peekdown](https://github.com/Mockitup/Peekdown)** (by Mockitup) — the project this fork originated from. Window management, file I/O, multi-tab architecture and the overall product shape all come from it
 - **[Marco](https://github.com/Ranrar/Marco)** / [marco-core](https://github.com/Ranrar/marco-core) (by Kim Skov Rasmussen, MIT) — the preview typography theme is derived from Marco's Astro/Space theme: gradient headings, full-width layout, striped tables and more
 
 Thank you both for open-sourcing your work! 🚀

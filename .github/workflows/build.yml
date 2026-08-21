@@ -51,11 +51,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG="${{ steps.tag.outputs.name }}"
-          TITLE="Peekdown ${TAG}"
+          TITLE="GlanceMD ${TAG}"
           if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             gh release create "$TAG" --repo "$GITHUB_REPOSITORY" \
               --title "$TITLE" \
-              --notes "Peekdown ${TAG} — built from GitHub Actions."
+              --notes "GlanceMD ${TAG} — built from GitHub Actions."
           fi
           gh release upload "$TAG" \
             "target/x86_64-pc-windows-msvc/release/peekdown.exe" \

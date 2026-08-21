@@ -85,6 +85,15 @@ git tag v1.2.7 && git push origin v1.2.7
 - **highlight.js** — 代码语法高亮
 - **不含 Electron、不含 Node、不含打包器** — 全部前端资源通过 `include_str!` 在编译期嵌入
 
+## 🙏 致谢
+
+本项目基于以下开源项目构建，并从中汲取了大量养分：
+
+- **[Peekdown](https://github.com/Mockitup/Peekdown)**（by Mockitup）— 本项目的前身。窗口管理、文件 I/O、多标签架构与整体产品形态均源自它
+- **[Marco](https://github.com/Ranrar/Marco)** / [marco-core](https://github.com/Ranrar/marco-core)（by Kim Skov Rasmussen，MIT）— 预览排版主题来自 Marco 的 Astro/Space 主题：渐变标题、铺满全屏、表格斑马纹等
+
+感谢两位作者的开源精神！🚀
+
 ## 📄 许可证
 
-MIT
+MIT（见 [LICENSE](LICENSE)）

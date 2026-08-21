@@ -78,6 +78,15 @@ target/x86_64-pc-windows-msvc/release/peekdown.exe
 - **highlight.js** — code syntax highlighting
 - **No Electron, no Node, no bundler** — all frontend assets are embedded at compile time via `include_str!`
 
+## 🙏 Acknowledgments
+
+This project is built on top of, and deeply indebted to:
+
+- **[Peekdown](https://github.com/Mockitup/Peekdown)** (by Mockitup) — the project this fork originated from. Window management, file I/O, multi-tab architecture and the overall product shape all come from it
+- **[Marco](https://github.com/Ranrar/Marco)** / [marco-core](https://github.com/Ranrar/marco-core) (by Kim Skov Rasmussen, MIT) — the preview typography theme is derived from Marco's Astro/Space theme: gradient headings, full-width layout, striped tables and more
+
+Thank you both for open-sourcing your work! 🚀
+
 ## 📄 License
 
-MIT
+MIT — see [LICENSE](LICENSE)

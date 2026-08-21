@@ -2,7 +2,7 @@
   <a href="README.md">简体中文</a> · <b>English</b>
 </p>
 
-# 🚀 Peekdown
+# 🚀 GlanceMD
 
 A lightweight native Windows markdown viewer and editor. Notepad-fast startup, Obsidian-pretty rendering — in a single ~800 KB executable.
 
@@ -56,18 +56,18 @@ Requires Rust and the WebView2 runtime (pre-installed on Windows 10/11).
 cargo build --release
 ```
 
-Output: `target/release/peekdown.exe`
+Output: `target/release/glancemd.exe`
 
 ### 🚦 Release via GitHub Actions
 
 Push a `v*` tag to automatically build and publish a release:
 
 ```bash
-git tag v1.2.7 && git push origin v1.2.7
+git tag v1.3.0 && git push origin v1.3.0
 ```
 
 ```bash
-target/x86_64-pc-windows-msvc/release/peekdown.exe
+target/x86_64-pc-windows-msvc/release/glancemd.exe
 ```
 
 ## ⚙️ Tech Stack
@@ -82,7 +82,7 @@ target/x86_64-pc-windows-msvc/release/peekdown.exe
 
 This project is built on top of, and deeply indebted to:
 
-- **[Peekdown](https://github.com/Mockitup/Peekdown)** (by Mockitup) — the project this fork originated from. Window management, file I/O, multi-tab architecture and the overall product shape all come from it
+- **[GlanceMD](https://github.com/Mockitup/GlanceMD)** (by Mockitup) — the project this fork originated from. Window management, file I/O, multi-tab architecture and the overall product shape all come from it
 - **[Marco](https://github.com/Ranrar/Marco)** / [marco-core](https://github.com/Ranrar/marco-core) (by Kim Skov Rasmussen, MIT) — the preview typography theme is derived from Marco's Astro/Space theme: gradient headings, full-width layout, striped tables and more
 
 Thank you both for open-sourcing your work! 🚀

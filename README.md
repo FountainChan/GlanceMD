@@ -2,7 +2,7 @@
   <b>简体中文</b> · <a href="README.en.md">English</a>
 </p>
 
-# 🚀 Peekdown
+# 🚀 GlanceMD
 
 一款轻量级的原生 Windows Markdown 查看器与编辑器。启动速度媲美记事本，渲染效果媲美 Obsidian —— 全部打包在约 800 KB 的单文件可执行程序中。
 
@@ -65,17 +65,17 @@
 cargo build --release
 ```
 
-输出：`target/release/peekdown.exe`
+输出：`target/release/glancemd.exe`
 
 ### 🚦 GitHub Actions 发布
 
 推送 `v*` 标签即自动构建并发布 Release：
 
 ```bash
-git tag v1.2.7 && git push origin v1.2.7
+git tag v1.3.0 && git push origin v1.3.0
 ```
 
-构建产物：`target/x86_64-pc-windows-msvc/release/peekdown.exe`
+构建产物：`target/x86_64-pc-windows-msvc/release/glancemd.exe`
 
 ## ⚙️ 技术栈
 
@@ -89,7 +89,7 @@ git tag v1.2.7 && git push origin v1.2.7
 
 本项目基于以下开源项目构建，并从中汲取了大量养分：
 
-- **[Peekdown](https://github.com/Mockitup/Peekdown)**（by Mockitup）— 本项目的前身。窗口管理、文件 I/O、多标签架构与整体产品形态均源自它
+- **[GlanceMD](https://github.com/Mockitup/GlanceMD)**（by Mockitup）— 本项目的前身。窗口管理、文件 I/O、多标签架构与整体产品形态均源自它
 - **[Marco](https://github.com/Ranrar/Marco)** / [marco-core](https://github.com/Ranrar/marco-core)（by Kim Skov Rasmussen，MIT）— 预览排版主题来自 Marco 的 Astro/Space 主题：渐变标题、铺满全屏、表格斑马纹等
 
 感谢两位作者的开源精神！🚀

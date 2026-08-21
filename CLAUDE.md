@@ -1,4 +1,4 @@
-# Peekdown — Markdown Viewer/Editor
+# GlanceMD — Markdown Viewer/Editor
 
 ## What is this?
 A lightweight native Windows markdown viewer/editor built with Rust + WebView2.
@@ -15,7 +15,7 @@ Goal: Notepad-fast startup, Obsidian-pretty UI. Single ~800 KB executable.
 ```bash
 cargo build --release
 ```
-Binary output: `target/release/peekdown.exe`
+Binary output: `target/release/glancemd.exe`
 
 `build.rs` uses `winresource` to embed `assets/icon.ico` into the .exe.
 
@@ -24,7 +24,7 @@ Binary output: `target/release/peekdown.exe`
 - `src/ipc.rs` — IPC message dispatch between Rust and JS
 - `src/file_ops.rs` — File read/write, native open/save dialogs (rfd)
 - `src/state.rs` — App state (empty struct — JS owns all tab state)
-- `src/window_state.rs` — Window position/size persistence (config dir: `peekdown/`)
+- `src/window_state.rs` — Window position/size persistence (config dir: `glancemd/`)
 - `build.rs` — Embeds app icon via winresource
 - `assets/icon.ico` — App icon (multi-resolution, generated from icon.png)
 - `src/frontend/` — All HTML/CSS/JS files (embedded at compile time via include_str!)
@@ -65,4 +65,4 @@ Binary output: `target/release/peekdown.exe`
 - No external runtime dependencies — everything embedded in the .exe
 - Dark theme with Catppuccin-inspired color palette (Mocha dark, Latte light)
 - JS uses IIFE pattern for modules (TabManager)
-- localStorage keys prefixed with `peekdown-` (theme, recent, preview-width)
+- localStorage keys prefixed with `glancemd-` (theme, recent, preview-width)

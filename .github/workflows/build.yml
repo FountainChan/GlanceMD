@@ -41,8 +41,8 @@ jobs:
       - name: Upload exe to artifact
         uses: actions/upload-artifact@v4
         with:
-          name: peekdown-windows
-          path: target/x86_64-pc-windows-msvc/release/peekdown.exe
+          name: glancemd-windows
+          path: target/x86_64-pc-windows-msvc/release/glancemd.exe
           if-no-files-found: error
 
       - name: Create or update release
@@ -58,5 +58,5 @@ jobs:
               --notes "GlanceMD ${TAG} — built from GitHub Actions."
           fi
           gh release upload "$TAG" \
-            "target/x86_64-pc-windows-msvc/release/peekdown.exe" \
+            "target/x86_64-pc-windows-msvc/release/glancemd.exe" \
             --repo "$GITHUB_REPOSITORY" --clobber

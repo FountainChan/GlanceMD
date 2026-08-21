@@ -41,12 +41,20 @@ pub fn handle_ipc_message(
                             "content": contents,
                             "path": p
                         }));
+                        // 单实例转发/拖放打开时确保窗口前置
+                        window.set_minimized(false);
+                        window.set_focus();
                     }
                     Err(e) => send_to_js(webview, "error", &serde_json::json!({
                         "message": format!("Failed to open file: {e}")
                     })),
                 }
             }
+        }
+        "focus_window" => {
+            // 第二实例无参数启动时仅聚焦已有窗口
+            window.set_minimized(false);
+            window.set_focus();
         }
         "save_file" => {
             if let Some(ref content) = parsed.content {

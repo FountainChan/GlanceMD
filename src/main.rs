@@ -15,6 +15,7 @@ use wry::{WebViewBuilder, WebViewBuilderExtWindows, WebViewExtWindows};
 
 mod file_ops;
 mod ipc;
+mod single_instance;
 mod state;
 mod window_state;
 
@@ -61,6 +62,16 @@ fn main() {
         }
     }
 
+    // ── 单实例：已有实例在运行时，转发文件参数（在其窗口新开标签页）后退出 ──
+    let _primary = single_instance::try_acquire_primary();
+    if _primary.is_none() {
+        let forward: Vec<String> = cli_file.clone().into_iter().collect();
+        if single_instance::send_open_request(&forward) {
+            return;
+        }
+        // 转发失败（主实例管道未就绪等）：回退为独立窗口启动
+    }
+
     // Read stdin if --stdin flag and stdin is a pipe/file (not a console)
     if stdin_flag {
         extern "system" {
@@ -90,6 +101,25 @@ fn main() {
 
     let event_loop = EventLoopBuilder::<UserEvent>::with_user_event().build();
     let proxy: EventLoopProxy<UserEvent> = event_loop.create_proxy();
+
+    // 主实例：后台线程监听管道，把第二实例转发的文件参数变成 open_file IPC
+    if _primary.is_some() {
+        let proxy_pipe = proxy.clone();
+        std::thread::spawn(move || {
+            single_instance::serve_open_requests(move |paths| {
+                if paths.is_empty() {
+                    let _ = proxy_pipe.send_event(UserEvent::IpcMessage(
+                        r#"{"command":"focus_window"}"#.to_string(),
+                    ));
+                } else {
+                    for p in paths {
+                        let msg = serde_json::json!({"command": "open_file", "path": p}).to_string();
+                        let _ = proxy_pipe.send_event(UserEvent::IpcMessage(msg));
+                    }
+                }
+            });
+        });
+    }
 
     let window = WindowBuilder::new()
         .with_title("Peekdown - Untitled")

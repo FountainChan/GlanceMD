@@ -63,7 +63,7 @@ Output: `target/release/peekdown.exe`
 Push a `v*` tag to automatically build and publish a release:
 
 ```bash
-git tag v1.2.5 && git push origin v1.2.5
+git tag v1.2.6 && git push origin v1.2.6
 ```
 
 ```bash

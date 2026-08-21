@@ -455,6 +455,55 @@ document.addEventListener('wheel', function(e) {
   });
 })();
 
+// TOC (outline) width resize
+(function() {
+  var handle = document.getElementById('toc-resize-handle');
+  var DEFAULT_WIDTH = 220;
+  var MIN_WIDTH = 160;
+  var MAX_WIDTH = 480;
+
+  // 恢复上次宽度（CSS 变量驱动 #toc-panel 与 #toc-list）
+  try {
+    var saved = localStorage.getItem('peekdown-toc-width');
+    if (saved) {
+      document.documentElement.style.setProperty('--toc-width', saved + 'px');
+    }
+  } catch(e) {}
+
+  var dragging = false;
+
+  handle.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    dragging = true;
+    handle.classList.add('dragging');
+    document.body.classList.add('toc-resizing');
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    // TOC 贴窗口左缘，鼠标 X 坐标即面板宽度
+    var width = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, e.clientX));
+    document.documentElement.style.setProperty('--toc-width', Math.round(width) + 'px');
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!dragging) return;
+    dragging = false;
+    handle.classList.remove('dragging');
+    document.body.classList.remove('toc-resizing');
+    try {
+      localStorage.setItem('peekdown-toc-width',
+        parseInt(document.documentElement.style.getPropertyValue('--toc-width')) || DEFAULT_WIDTH);
+    } catch(e) {}
+  });
+
+  // 双击手柄恢复默认宽度
+  handle.addEventListener('dblclick', function() {
+    document.documentElement.style.setProperty('--toc-width', DEFAULT_WIDTH + 'px');
+    try { localStorage.setItem('peekdown-toc-width', DEFAULT_WIDTH); } catch(e) {}
+  });
+})();
+
 // Find
 var findState = { open: false, matches: [], current: -1, marks: [] };
 

@@ -846,6 +846,7 @@ body.preview-resizing #preview { user-select: none; }
    TABLE OF CONTENTS
    ============================================ */
 #toc-panel {
+  position: relative;
   width: 0;
   height: 100%;
   background: var(--bg-surface);
@@ -856,15 +857,43 @@ body.preview-resizing #preview { user-select: none; }
 }
 
 #toc-panel.open {
-  width: 220px;
+  width: var(--toc-width, 220px);
   border-right-color: var(--border);
   overflow-y: auto;
 }
 
+/* 拖拽中禁用宽度过渡，保证跟手 */
+body.toc-resizing #toc-panel { transition: none; }
+
+/* TOC 右缘拖拽调整宽度 */
+#toc-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+#toc-panel.open #toc-resize-handle { opacity: 1; }
+
+#toc-resize-handle:hover,
+#toc-resize-handle.dragging {
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+body.toc-resizing { cursor: col-resize !important; }
+body.toc-resizing * { cursor: col-resize !important; }
+
 #toc-list {
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: var(--toc-width, 220px);
 }
 
 .toc-item {

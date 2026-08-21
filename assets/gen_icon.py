@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
-# GlanceMD 图标生成：Marco 风格紫→粉对角渐变圆角方块 + 白色粗体 G
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+# GlanceMD 图标生成：蓝→紫对角渐变圆角底 + 一支笔在写文件（白纸 + 文字线 + 斜笔）
+from PIL import Image, ImageDraw, ImageFilter
 
 S = 512  # 画布尺寸
-# Marco 主题渐变色（略提亮，视觉更明快）
-C1 = (168, 85, 247)    # #a855f7 紫
-C2 = (236, 72, 153)    # #ec4899 粉
-C1B = (186, 113, 255)  # 提亮后的紫（渐变起点）
+# 底色：亮蓝 → Marco 紫（比紫→粉更偏蓝）
+C1 = (77, 157, 255)    # #4d9dff 亮蓝
+C2 = (168, 85, 247)    # #a855f7 Marco 紫
 
 img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
 
-# ── 对角渐变（左上→右下，逐行插值叠加逐列微调）──
+# ── 对角渐变（左上→右下逐行插值）──
 grad = Image.new("RGBA", (S, S))
 gd = ImageDraw.Draw(grad)
 for y in range(S):
-    for_x = y / (S - 1)
-    r = int(C1B[0] + (C2[0] - C1B[0]) * for_x)
-    g = int(C1B[1] + (C2[1] - C1B[1]) * for_x)
-    b = int(C1B[2] + (C2[2] - C1B[2]) * for_x)
+    t = y / (S - 1)
+    r = int(C1[0] + (C2[0] - C1[0]) * t)
+    g = int(C1[1] + (C2[1] - C1[1]) * t)
+    b = int(C1[2] + (C2[2] - C1[2]) * t)
     gd.line([(0, y), (S, y)], fill=(r, g, b, 255))
 
-# ── 圆角蒙版：圆角方块 ──
+# ── 圆角蒙版 ──
 RADIUS = 118
 mask = Image.new("L", (S, S), 0)
 md = ImageDraw.Draw(mask)
@@ -28,29 +27,55 @@ md.rounded_rectangle([0, 0, S - 1, S - 1], radius=RADIUS, fill=255)
 icon = Image.new("RGBA", (S, S), (0, 0, 0, 0))
 icon.paste(grad, (0, 0), mask)
 
-# ── 顶部高光：白色径向柔光，增加"明亮"质感 ──
+# ── 顶部高光：柔光增加明亮质感 ──
 hl = Image.new("L", (S, S), 0)
 hd = ImageDraw.Draw(hl)
-hd.ellipse([S*0.05, -S*0.25, S*0.95, S*0.45], fill=70)
+hd.ellipse([S * 0.05, -S * 0.25, S * 0.95, S * 0.45], fill=60)
 hl = hl.filter(ImageFilter.GaussianBlur(60))
 white = Image.new("RGBA", (S, S), (255, 255, 255, 255))
 icon.paste(Image.composite(white, icon, hl), (0, 0), mask)
 
-# ── 白色粗体 G（居中，微投影保证小尺寸可读）──
-draw = ImageDraw.Draw(icon)
-font = ImageFont.truetype("C:/Windows/Fonts/arialbd.ttf", 300)
-bbox = draw.textbbox((0, 0), "G", font=font)
-tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-tx = (S - tw) / 2 - bbox[0]
-ty = (S - th) / 2 - bbox[1]
-# 投影
+# ── 纸张（白色圆角矩形 + 投影）──
 shadow = Image.new("RGBA", (S, S), (0, 0, 0, 0))
 sd = ImageDraw.Draw(shadow)
-sd.text((tx + 6, ty + 10), "G", font=font, fill=(90, 20, 110, 120))
-shadow = shadow.filter(ImageFilter.GaussianBlur(8))
+sd.rounded_rectangle([128, 124, 386, 404], radius=22, fill=(40, 10, 70, 110))
+shadow = shadow.filter(ImageFilter.GaussianBlur(14))
 icon = Image.alpha_composite(icon, shadow)
-draw = ImageDraw.Draw(icon)
-draw.text((tx, ty), "G", font=font, fill=(255, 255, 255, 255))
+
+paper = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+pd = ImageDraw.Draw(paper)
+pd.rounded_rectangle([128, 120, 386, 400], radius=22, fill=(255, 255, 255, 255))
+
+# 纸上文字线（Markdown 段落意象：标题线 + 三行正文线）
+LINE = (139, 92, 246, 165)  # 主题紫半透明
+pd.rounded_rectangle([162, 158, 306, 174], radius=8, fill=(139, 92, 246, 220))  # 标题：短粗
+pd.rounded_rectangle([162, 208, 352, 220], radius=6, fill=LINE)
+pd.rounded_rectangle([162, 248, 352, 260], radius=6, fill=LINE)
+pd.rounded_rectangle([162, 288, 300, 300], radius=6, fill=LINE)
+
+# ── 笔：竖直绘制后旋转 45°，笔尖朝左下、笔杆伸向右上 ──
+PW = 260  # 笔画布
+pen = Image.new("RGBA", (PW, PW), (0, 0, 0, 0))
+pend = ImageDraw.Draw(pen)
+cx = PW // 2
+# 笔杆（白）
+pend.rounded_rectangle([cx - 24, 8, cx + 24, 168], radius=10,
+                       fill=(255, 255, 255, 255), outline=(90, 50, 130, 90), width=2)
+# 笔夹（深紫细条）
+pend.rounded_rectangle([cx + 6, 20, cx + 14, 80], radius=4, fill=(90, 50, 130, 140))
+# 笔握（浅灰）
+pend.rounded_rectangle([cx - 22, 168, cx + 22, 196], radius=6,
+                       fill=(232, 230, 240, 255), outline=(90, 50, 130, 90), width=2)
+# 笔尖锥（香槟金）
+pend.polygon([(cx - 22, 196), (cx + 22, 196), (cx + 4, 238), (cx - 4, 238)],
+             fill=(245, 200, 110, 255))
+# 笔头（深色）
+pend.polygon([(cx - 4, 238), (cx + 4, 238), (cx, 256)], fill=(70, 40, 100, 255))
+# 笔尖触点（在纸面留下的一点）
+icon = Image.alpha_composite(icon, paper)
+pen = pen.rotate(45, resample=Image.BICUBIC, expand=True)
+# 贴放位置：笔尖落在纸面文字区右下方，笔杆越出纸右上角
+icon.alpha_composite(pen, (168, 128))
 
 icon.save("assets/icon.png")
 

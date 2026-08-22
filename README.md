@@ -20,11 +20,13 @@
 本项目基于开源项目 **[Peekdown](https://github.com/Mockitup/Peekdown)**（by Mockitup）深度开发而来，并采用 **[Marco](https://github.com/Ranrar/Marco)** 阅读器的排版主题。详见[致谢](#-致谢)。
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=FountainChan&repo=GlanceMD&show_icons=true&hide_border=true&title_color=a855f7&icon_color=ec4899&text_color=586e8c&bg_color=00000000" alt="GitHub Stats" height="165">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
+  <img src="https://img.shields.io/github/downloads/FountainChan/GlanceMD/total?style=flat-square&color=8b5cf6" alt="downloads">
+  <img src="https://img.shields.io/github/commit-activity/m/FountainChan/GlanceMD?style=flat-square&color=22c55e" alt="commits">
+  <img src="https://img.shields.io/github/issues/FountainChan/GlanceMD?style=flat-square&color=f97316" alt="issues">
+  <img src="https://img.shields.io/github/repo-size/FountainChan/GlanceMD?style=flat-square&color=38bdf8" alt="repo size">
 </p>
 
-<!-- TODO: v1.3.2+ 基于新版 GlanceMD 重新截图后恢复（截图预览模式 / 分屏模式） -->
+<!-- TODO: v1.3.3+ 基于新版 GlanceMD 重新截图后恢复（截图预览模式 / 分屏模式） -->
 
 ## 🎨 默认 Marco 排版
 
@@ -87,7 +89,7 @@ cargo build --release
 推送 `v*` 标签即自动构建并发布 Release：
 
 ```bash
-git tag v1.3.2 && git push origin v1.3.2
+git tag v1.3.3 && git push origin v1.3.3
 ```
 
 构建产物：`target/x86_64-pc-windows-msvc/release/glancemd.exe`

@@ -24,7 +24,13 @@ GlanceMD is deeply developed from the open-source project **[Peekdown](https://g
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
 </p>
 
-<!-- TODO: re-add screenshots based on the new GlanceMD build (preview mode / split view) -->
+<p align="center">
+  <img src="screenshot-preview.png" alt="GlanceMD preview (light theme)" width="820">
+</p>
+
+<p align="center">
+  <img src="screenshot-preview_dark.png" alt="GlanceMD preview (dark theme)" width="820">
+</p>
 
 ## ✅ Features
 

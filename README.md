@@ -24,7 +24,13 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
 </p>
 
-<!-- TODO: v1.3.4+ 基于新版 GlanceMD 重新截图后恢复（截图预览模式 / 分屏模式） -->
+<p align="center">
+  <img src="screenshot-preview.png" alt="GlanceMD 预览（浅色主题）" width="820">
+</p>
+
+<p align="center">
+  <img src="screenshot-preview_dark.png" alt="GlanceMD 预览（深色主题）" width="820">
+</p>
 
 ## 🎨 默认 Marco 排版
 

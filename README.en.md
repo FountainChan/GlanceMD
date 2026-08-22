@@ -20,11 +20,6 @@ Built with Rust + WebView2. No installer, no runtime dependencies, no Electron.
 GlanceMD is deeply developed from the open-source project **[Peekdown](https://github.com/Mockitup/Peekdown)** (by Mockitup), with the preview typography theme from the **[Marco](https://github.com/Ranrar/Marco)** reader. See [Acknowledgments](#-acknowledgments).
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=FountainChan&repo=GlanceMD&show_icons=true&hide_border=true&title_color=a855f7&icon_color=ec4899&text_color=586e8c&bg_color=00000000" alt="GitHub Stats" height="165">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
-</p>
-
-<p align="center">
   <img src="screenshot-preview.png" alt="GlanceMD preview (light theme)" width="820">
 </p>
 

@@ -20,11 +20,6 @@
 本项目基于开源项目 **[Peekdown](https://github.com/Mockitup/Peekdown)**（by Mockitup）深度开发而来，并采用 **[Marco](https://github.com/Ranrar/Marco)** 阅读器的排版主题。详见[致谢](#-致谢)。
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=FountainChan&repo=GlanceMD&show_icons=true&hide_border=true&title_color=a855f7&icon_color=ec4899&text_color=586e8c&bg_color=00000000" alt="GitHub Stats" height="165">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FountainChan&repo=GlanceMD&layout=compact&hide_border=true&title_color=a855f7&text_color=586e8c&bg_color=00000000" alt="Top Langs" height="165">
-</p>
-
-<p align="center">
   <img src="screenshot-preview.png" alt="GlanceMD 预览（浅色主题）" width="820">
 </p>
 

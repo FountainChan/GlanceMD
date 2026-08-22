@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: glancemd-windows
-          path: target/x86_64-pc-windows-msvc/release/glancemd.exe
+          path: target/x86_64-pc-windows-msvc/release/GlanceMD.exe
           if-no-files-found: error
 
       - name: Create or update release
@@ -58,5 +58,5 @@ jobs:
               --notes "GlanceMD ${TAG} — built from GitHub Actions."
           fi
           gh release upload "$TAG" \
-            "target/x86_64-pc-windows-msvc/release/glancemd.exe" \
+            "target/x86_64-pc-windows-msvc/release/GlanceMD.exe" \
             --repo "$GITHUB_REPOSITORY" --clobber

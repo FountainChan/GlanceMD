@@ -1,7 +1,12 @@
 [package]
 name = "glancemd"
-version = "1.3.3"
+version = "1.3.4"
 edition = "2021"
+
+# 产物名与仓库名保持一致：GlanceMD.exe
+[[bin]]
+name = "GlanceMD"
+path = "src/main.rs"
 
 [dependencies]
 wry = "0.49"

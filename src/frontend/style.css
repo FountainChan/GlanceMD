@@ -716,7 +716,7 @@ body.preview-resizing #preview { user-select: none; }
 #preview blockquote > :first-child { margin-top: 0; }
 #preview blockquote > :last-child { margin-bottom: 0; }
 
-/* ── Marco 图片：默认 inline（badge 行等横排），单图段落居中 block ── */
+/* ── Marco 图片：默认 inline（badge 行等横排），单图段落铺满居左 ── */
 #preview img {
   max-width: 100%;
   height: auto;
@@ -725,11 +725,12 @@ body.preview-resizing #preview { user-select: none; }
   border-radius: 4px;
 }
 
-/* 段落仅含一张图片时：居中展示（普通文章插图） */
+/* 段落仅含一张图片时：铺满可用宽度、居左（文章插图） */
 #preview p:has(> img:only-child) img,
 #preview p:has(> img:first-child + em:last-child) img {
   display: block;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 /* 图片题注：紧跟图片的 <em> 居中斜体 */
